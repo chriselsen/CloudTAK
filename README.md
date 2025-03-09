@@ -115,7 +115,22 @@ From the root directory, install the deploy dependencies
 npm install
 ```
 
-### 3. Building Docker Images & Pushing to ECR
+You also need to make sure that [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your local machine. 
+
+### 3. Prerequisites
+
+The following environment variable need to be set: 
+```
+export GITSHA=$(git rev-parse HEAD)
+export AWS_REGION='us-east-1'
+export AWS_ACCOUNT_ID='123456789012'
+export Environment='prod'
+export API_URL='map.example.com'
+```
+
+Afterwards you need to create an S3 bucket to hold web files with `aws s3 mb s3://coe-etl-${Environment}-${AWS_ACCOUNT_ID}-${AWS_REGION}-public --region ${AWS_REGION}`. 
+
+### 4. Building Docker Images & Pushing to ECR
 
 An script to build docker images and publish them to your ECR is provided and can be run using:
 
